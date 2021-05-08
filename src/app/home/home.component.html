@@ -1,7 +1,7 @@
 <section class="section">
   <div class="container">
     <div class="control has-icons-left">
-      <input class="input" type="search" placeholder="Search for a movie">
+      <input [formControl]="searchTerm" class="input" type="search" placeholder="Search for a movie">
       <span class="icon is-small is-left">
         <fa-icon [icon]="searchIcon"></fa-icon>
       </span>
@@ -11,8 +11,8 @@
 
 <section class="section">
   <div class="container">
-    <div class="columns is-centered">
-      <div *ngFor="let item of items;" class="column">
+    <div *ngIf="movieItems?.length; else noResults" class="columns is-centered">
+      <div *ngFor="let movieItem of movieItems;" class="column">
         <div class="card">
           <div class="card-image">
             <figure class="image is-2by3">
@@ -35,5 +35,10 @@
         </div>
       </div>
     </div>
+    <ng-template #noResults>
+      <div class="content">
+        <p>No search results.</p>
+      </div>
+    </ng-template>
   </div>
 </section>
