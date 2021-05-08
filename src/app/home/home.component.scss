@@ -1,0 +1,28 @@
+div#carousel {
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+div.card-image {
+  figure.image span.icon {
+    position: absolute;
+    top: 50%;
+    right: 45%;
+  }
+  button {
+    position: absolute;
+    top: 1%;
+    right: 1%;
+    p {
+      display: none;
+    }
+    &:hover {
+      span.icon {
+        display: none;
+      }
+      p {
+        display: initial;
+      }
+    }
+  }
+}

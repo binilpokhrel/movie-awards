@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import { faImage, faSearch, faStar } from '@fortawesome/free-solid-svg-icons';
 import { debounceTime, distinctUntilChanged, filter, map } from 'rxjs/operators';
 import { MovieDataService, MovieItem } from '../movie-data.service';
 
@@ -12,6 +12,8 @@ import { MovieDataService, MovieItem } from '../movie-data.service';
 })
 export class HomeComponent implements OnInit {
   searchIcon = faSearch;
+  nominateIcon = faStar;
+  imageIcon = faImage;
   movieItems: MovieItem[] = [];
 
   searchTerm = new FormControl('');
@@ -24,6 +26,7 @@ export class HomeComponent implements OnInit {
   ) { }
 
   // TODO: add `Showing X of Y results for: "{Movie}"` message to template
+  // TODO: add pipe to truncate title
 
   ngOnInit(): void {
     this.searchTerm.valueChanges.pipe(
