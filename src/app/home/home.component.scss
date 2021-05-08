@@ -16,7 +16,7 @@ div.card-image {
     p {
       display: none;
     }
-    &:hover {
+    &:hover:enabled {
       span.icon {
         display: none;
       }
