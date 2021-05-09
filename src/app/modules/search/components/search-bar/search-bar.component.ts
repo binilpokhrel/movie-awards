@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { debounceTime, distinctUntilChanged, filter, map } from 'rxjs/operators';
-import { MovieDataService } from '../../../../core/services/movie-data.service';
+import { SearchService } from '../../../../core/services/search.service';
 
 @Component({
   selector: 'app-search-bar',
@@ -15,7 +15,7 @@ export class SearchBarComponent implements OnInit {
   private DEBOUNCE_INTERVAL = 750;
 
   constructor(
-    private moviesService: MovieDataService
+    private searchService: SearchService
   ) { }
 
   ngOnInit() {
@@ -28,6 +28,6 @@ export class SearchBarComponent implements OnInit {
   }
 
   searchForMovie(value: string) {
-    this.moviesService.searchByTitle(value);
+    this.searchService.searchByTitle(value);
   }
 }

@@ -2,14 +2,13 @@ import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http'
 import { Injectable } from '@angular/core';
 import { ReplaySubject, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
-import { MovieItem } from '../../shared/models/movie-item.model';
 import { SearchResult, SearchResultConfig } from '../../shared/models/search-result.model';
 import { CoreModule } from '../core.module';
 
 @Injectable({
   providedIn: CoreModule
 })
-export class MovieDataService {
+export class SearchService {
 
   private readonly API_KEY = '6cd93de3';
   private readonly SERVER_URL = 'http://www.omdbapi.com/' ;

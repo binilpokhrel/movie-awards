@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { faStar as farStar, IconDefinition } from '@fortawesome/free-regular-svg-icons';
 import { faChevronLeft, faChevronRight, faImage, faStar } from '@fortawesome/free-solid-svg-icons';
-import { MovieDataService } from '../../../../core/services/movie-data.service';
 import { NominationService } from '../../../../core/services/nomination.service';
+import { SearchService } from '../../../../core/services/search.service';
 import { MovieItem } from '../../../../shared/models/movie-item.model';
 
 @Component({
@@ -26,7 +26,7 @@ export class SearchResultsComponent implements OnInit {
 
   constructor(
     private changeDetector: ChangeDetectorRef,
-    private moviesService: MovieDataService,
+    private searchService: SearchService,
     private nominationService: NominationService
   ) { }
 
@@ -35,7 +35,7 @@ export class SearchResultsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.moviesService.onResults().subscribe(results => {
+    this.searchService.onResults().subscribe(results => {
       this.movieItems = results.movies;
       this.totalResults = results.totalResults;
       this.changeDetector.markForCheck();
@@ -52,14 +52,14 @@ export class SearchResultsComponent implements OnInit {
   onNext() {
     if (this.currentPage * this.ITEMS_PER_PAGE < this.totalResults) {
       this.currentPage++;
-      this.moviesService.searchByPage(this.currentPage);
+      this.searchService.searchByPage(this.currentPage);
     }
   }
 
   onPrevious() {
     if (this.currentPage > 1) {
       this.currentPage--;
-      this.moviesService.searchByPage(this.currentPage);
+      this.searchService.searchByPage(this.currentPage);
     }
   }
 
