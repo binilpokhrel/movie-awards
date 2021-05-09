@@ -1,6 +1,7 @@
-# MovieAwards
+# TheShoppies
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.11.
+Favicon obtained from [Flaticon](https://www.flaticon.com/free-icon/award_879505?term=movie%20award&page=1&position=41&page=1&position=41&related_id=879505&origin=search).
 
 ## Development server
 
