@@ -1,16 +1,16 @@
 import { NgModule } from '@angular/core';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { NominationsComponent } from './nominations.component';
+import { NotificationsComponent } from './notifications.component';
 
 @NgModule({
   declarations: [
-    NominationsComponent
+    NotificationsComponent
   ],
   imports: [
     SharedModule
   ],
   exports: [
-    NominationsComponent
+    NotificationsComponent
   ]
 })
-export class NominationsModule { }
+export class NotificationsModule { }

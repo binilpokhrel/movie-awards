@@ -38,7 +38,7 @@ export class SearchResultsComponent implements OnInit {
     });
     this.nominationService.onUpdate().subscribe(nominations => {
       this.changeDetector.markForCheck();
-    })
+    });
   }
 
   onClick(movie: MovieItem) {

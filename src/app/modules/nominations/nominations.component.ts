@@ -17,10 +17,9 @@ export class NominationsComponent implements OnInit {
 
   ngOnInit() {
     this.nominationService.onUpdate().subscribe(nominations => {
-      console.log('update ran');
       this.nominatedMovies = nominations;
       this.changeDetector.markForCheck();
-    })
+    });
   }
 
   onDelete(id: string) {

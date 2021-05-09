@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { NominationsModule } from './modules/nominations/nominations.module';
+import { NotificationsModule } from './modules/notifications/notifications.module';
 import { SearchModule } from './modules/search/search.module';
 import { SharedModule } from './shared/shared.module';
 
@@ -19,7 +20,8 @@ import { SharedModule } from './shared/shared.module';
     CoreModule,
     SharedModule,
     SearchModule,
-    NominationsModule
+    NominationsModule,
+    NotificationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
