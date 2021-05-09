@@ -1,24 +1,25 @@
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HomeComponent, TitleYearPipe } from './home/home.component';
+import { CoreModule } from './core/core.module';
+import { NominationsModule } from './modules/nominations/nominations.module';
+import { SearchModule } from './modules/search/search.module';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
-    TitleYearPipe
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FontAwesomeModule,
-    ReactiveFormsModule
+    CoreModule,
+    SharedModule,
+    SearchModule,
+    NominationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

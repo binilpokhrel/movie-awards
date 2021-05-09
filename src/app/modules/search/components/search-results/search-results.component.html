@@ -1,15 +1,4 @@
 <section class="section">
-  <div class="container">
-    <div class="control has-icons-left">
-      <input [formControl]="searchTerm" class="input" type="search" placeholder="Search for a movie">
-      <span class="icon is-small is-left">
-        <fa-icon [icon]="searchIcon"></fa-icon>
-      </span>
-    </div>
-  </div>
-</section>
-
-<section class="section">
   <div class="container" id="carousel">
     <div *ngIf="movieItems?.length; else noSearchResults" class="columns is-centered">
       <div *ngFor="let movieItem of movieItems;" class="column is-2">
@@ -26,7 +15,7 @@
               </ng-template> 
             </figure>
             <button class="button is-primary is-light is-small is-rounded"
-              (click)="onNominate(movieItem)" [disabled]="disableNomination(movieItem.imdbID)">
+              (click)="onClick(movieItem)" [disabled]="shouldDisableNomination(movieItem.imdbID)">
               <span class="icon is-small">
                 <fa-icon [icon]="getNominationIcon(movieItem.imdbID)"></fa-icon>
               </span>
@@ -51,24 +40,5 @@
         <p>No search results.</p>
       </div>
     </ng-template>
-  </div>
-</section>
-
-<section class="section">
-  <div class="container">
-    <div class="content">
-      <p class="title">Nominations</p>
-      <div *ngIf="nominatedMovies.length; else noNominations" class="field is-grouped is-grouped-multiline">
-        <div *ngFor="let movie of nominatedMovies" class="control">
-          <div class="tags are-medium has-addons">
-            <span class="tag is-primary">{{ movie | titleYear }}</span>
-            <a class="tag is-delete" (click)="onDelete(movie.imdbID)"></a>
-          </div>
-        </div>
-      </div>
-      <ng-template #noNominations>
-        <p>No nominations.</p>
-      </ng-template>
-    </div>
   </div>
 </section>
