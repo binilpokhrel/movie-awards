@@ -12,13 +12,17 @@ import { MovieItem } from '../../../../shared/models/movie-item.model';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SearchResultsComponent implements OnInit {
+  currentPage = 1;
   movieItems: MovieItem[] = [];
+  totalResults = 0;
 
   imageIcon = faImage;
   nextIcon = faChevronRight;
   previousIcon = faChevronLeft;
   nominatedIcon = faStar;
   nominateIcon = farStar;
+
+  private readonly ITEMS_PER_PAGE = 10;
 
   constructor(
     private changeDetector: ChangeDetectorRef,
@@ -34,8 +38,9 @@ export class SearchResultsComponent implements OnInit {
   // TODO: add pipe to truncate title
 
   ngOnInit() {
-    this.moviesService.onResults().subscribe(movies => {
-      this.movieItems = movies;
+    this.moviesService.onResults().subscribe(results => {
+      this.movieItems = results.movies;
+      this.totalResults = results.totalResults;
       this.changeDetector.markForCheck();
     });
     this.nominationService.onUpdate().subscribe(nominations => {
@@ -48,11 +53,17 @@ export class SearchResultsComponent implements OnInit {
   }
 
   onNext() {
-    this.moviesService.nextPage();
+    if (this.currentPage * this.ITEMS_PER_PAGE < this.totalResults) {
+      this.currentPage++;
+      this.moviesService.searchByPage(this.currentPage);
+    }
   }
 
   onPrevious() {
-    this.moviesService.previousPage();
+    if (this.currentPage > 1) {
+      this.currentPage--;
+      this.moviesService.searchByPage(this.currentPage);
+    }
   }
 
   shouldDisableNomination(id: string): Boolean {

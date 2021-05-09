@@ -12,35 +12,23 @@ import { CoreModule } from '../core.module';
 export class MovieDataService {
 
   private readonly API_KEY = '6cd93de3';
-  private readonly ITEMS_PER_PAGE = 10;
   private readonly SERVER_URL = 'http://www.omdbapi.com/' ;
 
   private currentTitle: string = '';
-  private currentPage: number = 1;
-  private searchResults$ = new ReplaySubject<MovieItem[]>(1);
-  private totalResults: number = 0;
+  private searchResults$ = new ReplaySubject<SearchResult>(1);
 
   constructor(private httpClient: HttpClient) { }
-
-  nextPage() {
-    if (this.currentTitle && this.currentPage * this.ITEMS_PER_PAGE < this.totalResults) {
-      this.searchByTitle(this.currentTitle, this.currentPage + 1);
-    }
-  }
 
   onResults() {
     return this.searchResults$.asObservable();
   }
 
-  previousPage() {
-    if (this.currentTitle && this.currentPage > 1) {
-      this.searchByTitle(this.currentTitle, this.currentPage - 1);
-    }
+  searchByPage(page: number) {
+    this.searchByTitle(this.currentTitle, page);
   }
 
   searchByTitle(title: string, page: number = 1) {
     this.currentTitle = title.trim();
-    this.currentPage = page;
 
     const options = this.currentTitle ?
       { params: new HttpParams()
@@ -56,8 +44,7 @@ export class MovieDataService {
         catchError(this.handleError),
       )
       .subscribe(searchResults => {
-        this.totalResults = searchResults.totalResults;
-        this.searchResults$.next(searchResults.movies);
+        this.searchResults$.next(searchResults);
       });
   }
 
