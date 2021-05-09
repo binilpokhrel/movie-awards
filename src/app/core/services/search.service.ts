@@ -11,7 +11,7 @@ import { CoreModule } from '../core.module';
 export class SearchService {
 
   private readonly API_KEY = '6cd93de3';
-  private readonly SERVER_URL = 'http://www.omdbapi.com/' ;
+  private readonly SERVER_URL = 'https://www.omdbapi.com/' ;
 
   private currentTitle: string = '';
   private searchResults$ = new ReplaySubject<SearchResult>(1);
