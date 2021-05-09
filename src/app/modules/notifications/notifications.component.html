@@ -1,6 +1,6 @@
 <section class="section">
   <div class="container content">
-    <div *ngFor="let notificationItem of notifications" class="notification is-success">
+    <div *ngFor="let notificationItem of notifications; trackBy: trackById" class="notification is-success">
       <button class="delete" (click)="onDelete(notificationItem.id)"></button>
       {{ notificationItem.message }}
     </div>

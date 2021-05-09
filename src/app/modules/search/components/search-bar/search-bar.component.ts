@@ -24,7 +24,7 @@ export class SearchBarComponent implements OnInit {
       map(movieTitle => movieTitle.trim()),
       distinctUntilChanged(),
       filter(movieTitle => !!movieTitle)
-    ).subscribe(value => this.searchForMovie(value)); // TODO: worth converting to switchMap?
+    ).subscribe(value => this.searchForMovie(value));
   }
 
   searchForMovie(value: string) {

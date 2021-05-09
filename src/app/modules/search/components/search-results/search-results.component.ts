@@ -34,9 +34,6 @@ export class SearchResultsComponent implements OnInit {
     return this.nominationService.contains(id) ? this.nominatedIcon : this.nominateIcon;
   }
 
-  // TODO: add `Showing X of Y results for: "{Movie}"` message to template
-  // TODO: add pipe to truncate title
-
   ngOnInit() {
     this.moviesService.onResults().subscribe(results => {
       this.movieItems = results.movies;
@@ -68,5 +65,9 @@ export class SearchResultsComponent implements OnInit {
 
   shouldDisableNomination(id: string): Boolean {
     return this.nominationService.isFull() || this.nominationService.contains(id);
+  }
+
+  trackById(index: number, item: MovieItem) {
+    return item.imdbID;
   }
 }

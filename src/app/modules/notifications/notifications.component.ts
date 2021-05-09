@@ -25,4 +25,8 @@ export class NotificationsComponent implements OnInit {
   onDelete(id: number) {
     this.notificationService.remove(id);
   }
+
+  trackById(index: number, item: NotificationItem) {
+    return item.id;
+  }
 }

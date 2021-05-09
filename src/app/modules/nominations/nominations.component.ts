@@ -25,4 +25,8 @@ export class NominationsComponent implements OnInit {
   onDelete(id: string) {
     this.nominationService.remove(id);
   }
+
+  trackById(index: number, item: MovieItem) {
+    return item.imdbID;
+  }
 }
