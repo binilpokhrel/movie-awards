@@ -1,6 +1,27 @@
 <section class="section">
-  <div class="container" id="carousel">
-    <div *ngIf="movieItems?.length; else noSearchResults" class="columns is-centered">
+  <div *ngIf="movieItems?.length; else noSearchResults" class="container">
+    <nav class="level pagination" role="navigation" aria-label="pagination">
+      <div class="level-left">
+        <div class="level-item">
+          <p class="subtitle is-5">
+            Showing <strong>{{ movieItems.length }}</strong> results
+          </p>
+        </div>
+      </div>
+      <div class="level-right">
+        <a class="level-item pagination-previous button" (click)="onPrevious()">
+          <span class="icon">
+            <fa-icon [icon]="previousIcon"></fa-icon>
+          </span>
+        </a>
+        <a class="level-item pagination-next button" (click)="onNext()">
+          <span class="icon">
+            <fa-icon [icon]="nextIcon"></fa-icon>
+          </span>
+        </a>
+      </div>
+    </nav>
+    <div class="columns is-centered" id="carousel">
       <div *ngFor="let movieItem of movieItems;" class="column is-2">
         <div class="card">
           <div class="card-image">
@@ -35,10 +56,12 @@
         </div>
       </div>
     </div>
-    <ng-template #noSearchResults>
-      <div class="content">
-        <p>No search results.</p>
-      </div>
-    </ng-template>
   </div>
+  <ng-template #noSearchResults>
+    <div class="container">
+      <div class="content">
+        <p class="subtitle is-5">No search results.</p>
+      </div>
+    </div>
+  </ng-template>
 </section>

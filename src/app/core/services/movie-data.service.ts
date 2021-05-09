@@ -11,25 +11,43 @@ import { CoreModule } from '../core.module';
 })
 export class MovieDataService {
 
-  private API_KEY = '6cd93de3';
-  private SERVER_URL = 'http://www.omdbapi.com/' ;
+  private readonly API_KEY = '6cd93de3';
+  private readonly ITEMS_PER_PAGE = 10;
+  private readonly SERVER_URL = 'http://www.omdbapi.com/' ;
 
+  private currentTitle: string = '';
+  private currentPage: number = 1;
   private searchResults$ = new ReplaySubject<MovieItem[]>(1);
+  private totalResults: number = 0;
 
   constructor(private httpClient: HttpClient) { }
+
+  nextPage() {
+    if (this.currentTitle && this.currentPage * this.ITEMS_PER_PAGE < this.totalResults) {
+      this.searchByTitle(this.currentTitle, this.currentPage + 1);
+    }
+  }
 
   onResults() {
     return this.searchResults$.asObservable();
   }
 
-  searchByTitle(title: string) {
-    title = title.trim();
+  previousPage() {
+    if (this.currentTitle && this.currentPage > 1) {
+      this.searchByTitle(this.currentTitle, this.currentPage - 1);
+    }
+  }
 
-    const options = title ?
+  searchByTitle(title: string, page: number = 1) {
+    this.currentTitle = title.trim();
+    this.currentPage = page;
+
+    const options = this.currentTitle ?
       { params: new HttpParams()
           .set('apikey', this.API_KEY)
-          .set('s', title)
+          .set('s', this.currentTitle)
           .set('type', 'movie')
+          .set('page', page.toString())
       } : {};
 
     return this.httpClient.get<SearchResultConfig>(this.SERVER_URL, options)
@@ -38,6 +56,7 @@ export class MovieDataService {
         catchError(this.handleError),
       )
       .subscribe(searchResults => {
+        this.totalResults = searchResults.totalResults;
         this.searchResults$.next(searchResults.movies);
       });
   }

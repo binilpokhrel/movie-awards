@@ -7,7 +7,9 @@ import { CoreModule } from '../core.module';
   providedIn: CoreModule
 })
 export class NotificationService {
-  private CAPACITY = 5;
+
+  private readonly CAPACITY = 5;
+
   private id = 0;
   private notificationList: { [index: number]: NotificationItem } = {};
   private notificationList$ = new ReplaySubject<NotificationItem[]>(1);

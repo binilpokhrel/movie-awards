@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { faStar as farStar, IconDefinition } from '@fortawesome/free-regular-svg-icons';
-import { faImage, faStar } from '@fortawesome/free-solid-svg-icons';
+import { faChevronLeft, faChevronRight, faImage, faStar } from '@fortawesome/free-solid-svg-icons';
 import { MovieDataService } from '../../../../core/services/movie-data.service';
 import { NominationService } from '../../../../core/services/nomination.service';
 import { MovieItem } from '../../../../shared/models/movie-item.model';
@@ -15,6 +15,8 @@ export class SearchResultsComponent implements OnInit {
   movieItems: MovieItem[] = [];
 
   imageIcon = faImage;
+  nextIcon = faChevronRight;
+  previousIcon = faChevronLeft;
   nominatedIcon = faStar;
   nominateIcon = farStar;
 
@@ -43,6 +45,14 @@ export class SearchResultsComponent implements OnInit {
 
   onClick(movie: MovieItem) {
     this.nominationService.add(movie);
+  }
+
+  onNext() {
+    this.moviesService.nextPage();
+  }
+
+  onPrevious() {
+    this.moviesService.previousPage();
   }
 
   shouldDisableNomination(id: string): Boolean {

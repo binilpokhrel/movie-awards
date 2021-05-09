@@ -8,7 +8,9 @@ import { NotificationService } from './notification.service';
   providedIn: CoreModule
 })
 export class NominationService {
-  private CAPACITY = 5;
+
+  private readonly CAPACITY = 5;
+
   private nominationList: { [index: string]: MovieItem } = {};
   private nominationList$ = new ReplaySubject<MovieItem[]>(1);
   private size = 0;
