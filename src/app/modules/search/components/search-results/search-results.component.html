@@ -1,4 +1,4 @@
-<section class="section">
+<section class="section pb-0">
   <div *ngIf="movieItems?.length; else noSearchResults" class="container">
     <nav class="level pagination" role="navigation" aria-label="pagination">
       <div class="level-left">
@@ -21,7 +21,7 @@
         </a>
       </div>
     </nav>
-    <div class="columns is-centered" id="carousel">
+    <div class="columns" id="carousel">
       <div *ngFor="let movieItem of movieItems;" class="column is-2">
         <div class="card">
           <div class="card-image">
