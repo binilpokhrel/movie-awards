@@ -10,6 +10,7 @@ export interface SearchResultConfig {
 export class SearchResult {
   constructor(
     public movies: MovieItem[],
+    public page: number,
     public totalResults: number,
     public error: boolean
   ) {
@@ -20,9 +21,10 @@ export class SearchResult {
     })
   }
 
-  static fromAPI(config: SearchResultConfig): SearchResult {
+  static fromAPI(config: SearchResultConfig, page = 1): SearchResult {
     return new SearchResult(
       config.Search ? config.Search?.map(movie => MovieItem.fromAPI(<any>movie)) : [],
+      page,
       config.totalResults ? Number(config.totalResults) : 0,
       config.Response == "False" || !!config.error
     )

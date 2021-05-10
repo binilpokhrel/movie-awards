@@ -3,9 +3,11 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { TitleYearPipe } from './pipes/movie-label.pipe';
+import { PageItemRangePipe } from './pipes/page-item-range.pipe';
 
 @NgModule({
   declarations: [
+    PageItemRangePipe,
     TitleYearPipe
   ],
   imports: [
@@ -14,6 +16,7 @@ import { TitleYearPipe } from './pipes/movie-label.pipe';
     ReactiveFormsModule
   ],
   exports: [
+    PageItemRangePipe,
     TitleYearPipe,
     CommonModule,
     FontAwesomeModule,

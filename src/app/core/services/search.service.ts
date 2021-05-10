@@ -39,7 +39,7 @@ export class SearchService {
 
     return this.httpClient.get<SearchResultConfig>(this.SERVER_URL, options)
       .pipe(
-        map(config => SearchResult.fromAPI(config)),
+        map(config => SearchResult.fromAPI(config, page)),
         catchError(this.handleError),
       )
       .subscribe(searchResults => {

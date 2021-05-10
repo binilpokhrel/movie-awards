@@ -22,7 +22,7 @@ export class SearchResultsComponent implements OnInit {
   nominatedIcon = faStar;
   nominateIcon = farStar;
 
-  private readonly ITEMS_PER_PAGE = 10;
+  readonly ITEMS_PER_PAGE = 10;
 
   constructor(
     private changeDetector: ChangeDetectorRef,
@@ -36,6 +36,7 @@ export class SearchResultsComponent implements OnInit {
 
   ngOnInit() {
     this.searchService.onResults().subscribe(results => {
+      this.currentPage = results.page;
       this.movieItems = results.movies;
       this.totalResults = results.totalResults;
       this.changeDetector.markForCheck();

@@ -1,20 +1,23 @@
 <section class="section pb-0">
   <div *ngIf="movieItems?.length; else noSearchResults" class="container">
-    <nav class="level pagination" role="navigation" aria-label="pagination">
+    <nav class="level" role="navigation" aria-label="pagination">
       <div class="level-left">
         <div class="level-item">
           <p class="subtitle is-5">
-            Showing <strong>{{ movieItems.length }}</strong> results
+            Showing <strong>{{ movieItems.length }}</strong> results of {{ totalResults }}
           </p>
         </div>
       </div>
       <div class="level-right">
-        <a class="level-item pagination-previous button" (click)="onPrevious()">
+        <p class="level-item">
+          {{ currentPage | pageItemRange: movieItems.length : ITEMS_PER_PAGE }}
+        </p>
+        <a class="level-item button" (click)="onPrevious()">
           <span class="icon">
             <fa-icon [icon]="previousIcon"></fa-icon>
           </span>
         </a>
-        <a class="level-item pagination-next button" (click)="onNext()">
+        <a class="level-item button" (click)="onNext()">
           <span class="icon">
             <fa-icon [icon]="nextIcon"></fa-icon>
           </span>
